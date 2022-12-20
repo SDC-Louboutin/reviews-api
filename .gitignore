@@ -1,0 +1,4 @@
+.DS_Store
+*.env
+*.map
+node_modules/

@@ -1,5 +1,6 @@
 require('dotenv').config;
 const path = require('path');
+const controllers = require('./controllers/index.js');
 
 const express = require('express');
 const morgan = require('morgan');
@@ -9,9 +10,11 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  res.status(201).send('Hello world');
-})
+app.get('/reviews', controllers.getReviews)
+
+app.get('/reviews/meta/', controllers.getMeta);
+
+app.post('/reviews', controllers.postReview)
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

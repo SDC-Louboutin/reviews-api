@@ -19,17 +19,23 @@ const getReviews = (req, res) => {
     res.status(400).send('Incorrect request');
   } else {
     models.getReviews(product_id, count, sort)
-    .then(data => {
-      res.status(200).send(data);
-    })
-    .catch(err => {
-      res.status(400).send(err);
-    })
+      .then(data => {
+        res.status(200).send(data);
+      })
+      .catch(err => {
+        res.status(400).send(err);
+      })
   }
 }
 
 const postReview = (req, res) => {
-  res.status(201).send('Test post');
+  models.postReview(req.body)
+    .then(response => {
+      res.status(201).send('Review accepted');
+    })
+    .catch(err => {
+      res.status(400).send('Failed to post review')
+    })
 }
 
 const getMeta = (req, res) => {
